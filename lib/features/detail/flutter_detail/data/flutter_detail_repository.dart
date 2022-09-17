@@ -37,15 +37,15 @@ class FlutterDetailRepository {
       return right(
         await remoteResponse.when(
           noConnection: () async {
-            final flutterDTO = await _localService.getFlutterDetail(id);
-            return Fresh.no(entity: flutterDTO?.toDomain());
+            final dto = await _localService.getFlutterDetail(id);
+            return Fresh.no(entity: dto?.toDomain());
           },
           notModified: () async {
             final cachedData = await _localService.getFlutterDetail(id);
             return Fresh.yes(entity: cachedData?.toDomain());
           },
           withNewData: (html) async {
-            final dto = DetailDTO(html: html);
+            final dto = DetailDTO(id: id, html: html);
             await _localService.upsertFlutterDetail(dto);
             return Fresh.yes(entity: dto.toDomain());
           },
