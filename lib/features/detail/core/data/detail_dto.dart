@@ -6,12 +6,12 @@ part 'detail_dto.g.dart';
 
 @Collection(inheritance: false)
 class DetailDTO extends Equatable {
-  const DetailDTO({required this.html}) : id = Isar.autoIncrement;
+  const DetailDTO({required this.id, required this.html});
 
-  final Id id;
+  final Id? id;
   final String html;
 
-  Detail toDomain() => Detail(id: id, html: html);
+  Detail toDomain() => Detail(id: id!, html: html);
 
   @ignore
   @override

@@ -68,6 +68,7 @@ DetailDTO _detailDTODeserializeNative(
 ) {
   final object = DetailDTO(
     html: reader.readString(offsets[0]),
+    id: id,
   );
   return object;
 }
@@ -93,7 +94,7 @@ Object _detailDTOSerializeWeb(
 
 DetailDTO _detailDTODeserializeWeb(
     IsarCollection<DetailDTO> collection, Object jsObj) {
-  /*final object = DetailDTO(html: IsarNative.jsObjectGet(jsObj, r'html') ?? '',);*/
+  /*final object = DetailDTO(html: IsarNative.jsObjectGet(jsObj, r'html') ?? '',id: IsarNative.jsObjectGet(jsObj, r'id') ,);*/
   //return object;
   throw UnimplementedError();
 }
@@ -106,7 +107,7 @@ P _detailDTODeserializePropWeb<P>(Object jsObj, String propertyName) {
 }
 
 Id _detailDTOGetId(DetailDTO object) {
-  return object.id;
+  return object.id ?? Isar.autoIncrement;
 }
 
 List<IsarLinkBase<dynamic>> _detailDTOGetLinks(DetailDTO object) {
@@ -324,8 +325,24 @@ extension DetailDTOQueryFilter
     });
   }
 
+  QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'id',
+      ));
+    });
+  }
+
+  QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'id',
+      ));
+    });
+  }
+
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idEqualTo(
-      int value) {
+      int? value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -335,7 +352,7 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idGreaterThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -348,7 +365,7 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idLessThan(
-    int value, {
+    int? value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -361,8 +378,8 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
+    int? lower,
+    int? upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
