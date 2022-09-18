@@ -12,11 +12,11 @@ typedef _BootstrapBuilder = Widget Function(Dio dio);
 void bootstrap(_BootstrapBuilder builder) {
   WidgetsFlutterBinding.ensureInitialized();
 
+  Bloc.observer = AppBlocObserver();
+
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
-
-  Bloc.observer = AppBlocObserver();
 
   runZonedGuarded(
     () async {
@@ -31,7 +31,7 @@ void bootstrap(_BootstrapBuilder builder) {
           validateStatus: (status) =>
               status != null && status >= 200 && status < 400,
         );
-      builder(dio);
+      runApp(builder(dio));
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );

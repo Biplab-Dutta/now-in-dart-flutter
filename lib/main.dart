@@ -5,7 +5,7 @@ import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/data/flutter_detail_remote_service.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/data/flutter_detail_repository.dart';
 
-void main() async {
+void main() {
   bootstrap(
     (dio) {
       final dartDetailRepository = DartDetailRepository(
