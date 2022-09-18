@@ -11,10 +11,10 @@ typedef _DartDetailOrFailure = Future<Either<DetailFailure, Fresh<Detail?>>>;
 
 class DartDetailRepository {
   DartDetailRepository({
-    required DartDetailLocalService localService,
-    required DartDetailRemoteService remoteService,
-  })  : _localService = localService,
-        _remoteService = remoteService;
+    DartDetailLocalService? localService,
+    DartDetailRemoteService? remoteService,
+  })  : _localService = localService ?? DartDetailLocalService(),
+        _remoteService = remoteService ?? DartDetailRemoteService();
 
   final DartDetailLocalService _localService;
   final DartDetailRemoteService _remoteService;

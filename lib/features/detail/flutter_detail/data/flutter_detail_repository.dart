@@ -12,10 +12,10 @@ typedef _FlutterDetailOrFailure = Future<Either<DetailFailure, Fresh<Detail?>>>;
 
 class FlutterDetailRepository {
   FlutterDetailRepository({
-    required FlutterDetailLocalService localService,
-    required FlutterDetailRemoteService remoteService,
-  })  : _localService = localService,
-        _remoteService = remoteService;
+    FlutterDetailLocalService? localService,
+    FlutterDetailRemoteService? remoteService,
+  })  : _localService = localService ?? FlutterDetailLocalService(),
+        _remoteService = remoteService ?? FlutterDetailRemoteService();
 
   final FlutterDetailLocalService _localService;
   final FlutterDetailRemoteService _remoteService;

@@ -5,8 +5,8 @@ typedef _DartDetail = Future<RemoteResponse<String>>;
 
 class DartDetailRemoteService extends DetailRemoteService {
   DartDetailRemoteService({
-    required super.dio,
-    required super.headerCache,
+    super.dio,
+    super.headerCache,
   });
 
   _DartDetail getDartChangelogDetail() {

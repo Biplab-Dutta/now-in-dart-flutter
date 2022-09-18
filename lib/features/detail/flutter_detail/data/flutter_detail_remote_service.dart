@@ -5,8 +5,8 @@ typedef _FlutterDetail = Future<RemoteResponse<String>>;
 
 class FlutterDetailRemoteService extends DetailRemoteService {
   FlutterDetailRemoteService({
-    required super.dio,
-    required super.headerCache,
+    super.dio,
+    super.headerCache,
   });
 
   _FlutterDetail getWhatsNewFlutterDetail() {

@@ -4,7 +4,9 @@ import 'package:now_in_dart_flutter/features/core/data/data.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
 
 abstract class DetailLocalService {
-  DetailLocalService(IsarDatabase? isarDb) : _isarDb = isarDb ?? IsarDatabase();
+  DetailLocalService({
+    IsarDatabase? isarDb,
+  }) : _isarDb = isarDb ?? IsarDatabase();
 
   final IsarDatabase _isarDb;
 

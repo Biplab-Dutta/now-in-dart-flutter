@@ -8,7 +8,9 @@ abstract class HeaderCache {
 }
 
 class GithubHeaderCache implements HeaderCache {
-  GithubHeaderCache(IsarDatabase? isarDb) : _isarDb = isarDb ?? IsarDatabase();
+  GithubHeaderCache({
+    IsarDatabase? isarDb,
+  }) : _isarDb = isarDb ?? IsarDatabase();
 
   final IsarDatabase _isarDb;
 

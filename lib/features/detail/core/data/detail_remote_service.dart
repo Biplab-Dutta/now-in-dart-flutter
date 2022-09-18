@@ -6,10 +6,10 @@ typedef _RemoteMarkdown = Future<RemoteResponse<String>>;
 
 abstract class DetailRemoteService {
   DetailRemoteService({
-    required Dio dio,
-    required HeaderCache headerCache,
-  })  : _dio = dio,
-        _headerCache = headerCache;
+    Dio? dio,
+    HeaderCache? headerCache,
+  })  : _dio = dio ?? Dio(),
+        _headerCache = headerCache ?? GithubHeaderCache();
 
   final Dio _dio;
   final HeaderCache _headerCache;
