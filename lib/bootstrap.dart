@@ -24,12 +24,11 @@ void bootstrap(_BootstrapBuilder builder) {
       final dio = Dio()
         ..options = BaseOptions(
           baseUrl: 'api.github.com',
-          headers: {
-            'Accept': 'application/vnd.github.html+json',
-          },
+          headers: {'Accept': 'application/vnd.github.html+json'},
           responseType: ResponseType.plain,
-          validateStatus: (status) =>
-              status != null && status >= 200 && status < 400,
+          validateStatus: (status) {
+            return status != null && status >= 200 && status < 400;
+          },
         );
       runApp(builder(dio));
     },
