@@ -19,14 +19,6 @@ class Fresh<T> extends Equatable {
   /// Determines if the entity is fresh or not.
   final bool? isFresh;
 
-  /// Helper method to return new Fresh instance.
-  Fresh<T> newInstance(T entity) {
-    return Fresh._(
-      entity: entity,
-      isFresh: isFresh,
-    );
-  }
-
   @override
   List<Object?> get props => [entity, isFresh];
 }
