@@ -15,10 +15,11 @@ class DartDetailBloc extends Bloc<DartDetailEvent, DartDetailState> {
   })  : _repository = repository,
         super(const DartDetailState()) {
     on<DartDetailEvent>(
-      (event, emit) {
-        event.when<Future<void>>(
-          dartChangelogDetailRequested: (id) =>
-              _onDartChangelogDetailRequested(event, emit, id),
+      (event, emit) async {
+        await event.when<Future<void>>(
+          dartChangelogDetailRequested: (id) {
+            return _onDartChangelogDetailRequested(emit, id);
+          },
         );
       },
     );
@@ -27,15 +28,27 @@ class DartDetailBloc extends Bloc<DartDetailEvent, DartDetailState> {
   final DartDetailRepository _repository;
 
   Future<void> _onDartChangelogDetailRequested(
-    DartDetailEvent event,
     Emitter<DartDetailState> emit,
     int id,
   ) async {
-    emit(state.copyWith(status: DartDetailStatus.loading));
+    emit(state.copyWith(status: () => DartDetailStatus.loading));
     final failureOrSuccessDetail = await _repository.getDartDetail(id);
     return failureOrSuccessDetail.fold(
-      (failure) => emit(state.copyWith(status: DartDetailStatus.failure)),
-      (detail) => emit(state.copyWith(detail: detail)),
+      (failure) => emit(
+        state.copyWith(
+          status: () => DartDetailStatus.failure,
+          failureMessage: () => failure.when<String>(
+            api: (errorCode) => 'API returned $errorCode',
+          ),
+        ),
+      ),
+      (detail) => emit(
+        state.copyWith(
+          status: () => DartDetailStatus.success,
+          detail: () => detail,
+          failureMessage: () => null,
+        ),
+      ),
     );
   }
 }

@@ -21,19 +21,19 @@ class DartDetailRepository {
 
   _DartDetailOrFailure getDartDetail(int id) async {
     try {
-      final remoteResponse = await _remoteService.getDartChangelogDetail();
+      final remoteResponse = await _remoteService.getDartChangelogDetail(id);
       return right(
         await remoteResponse.when(
           noConnection: () async {
             final dto = await _localService.getDartDetail(id);
-            return Fresh.no(entity: dto?.toDomain());
+            return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
           },
           notModified: () async {
             final cachedData = await _localService.getDartDetail(id);
-            return Fresh.yes(entity: cachedData?.toDomain());
+            return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
           },
           withNewData: (html) async {
-            final dto = DetailDTO(id: id, html: html);
+            final dto = DetailDTO.parseHtml(id, html);
             await _localService.upsertDartDetail(dto);
             return Fresh.yes(entity: dto.toDomain());
           },

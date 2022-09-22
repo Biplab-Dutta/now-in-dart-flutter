@@ -9,8 +9,8 @@ class DartDetailRemoteService extends DetailRemoteService {
     super.headerCache,
   });
 
-  _DartDetail getDartChangelogDetail() {
+  _DartDetail getDartChangelogDetail(int id) {
     const fullPathToMarkdownFile = 'repos/dart-lang/sdk/contents/CHANGELOG.md';
-    return super.getDetail(fullPathToMarkdownFile);
+    return super.getDetail(id, fullPathToMarkdownFile);
   }
 }
