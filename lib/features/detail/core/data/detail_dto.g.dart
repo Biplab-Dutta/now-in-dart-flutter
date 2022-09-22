@@ -7,7 +7,7 @@ part of 'detail_dto.dart';
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, avoid_js_rounded_ints, prefer_final_locals
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters
 
 extension GetDetailDTOCollection on Isar {
   IsarCollection<DetailDTO> get detailDTOs => this.collection();
@@ -24,12 +24,9 @@ const DetailDTOSchema = CollectionSchema(
     )
   },
   estimateSize: _detailDTOEstimateSize,
-  serializeNative: _detailDTOSerializeNative,
-  deserializeNative: _detailDTODeserializeNative,
-  deserializePropNative: _detailDTODeserializePropNative,
-  serializeWeb: _detailDTOSerializeWeb,
-  deserializeWeb: _detailDTODeserializeWeb,
-  deserializePropWeb: _detailDTODeserializePropWeb,
+  serialize: _detailDTOSerialize,
+  deserialize: _detailDTODeserialize,
+  deserializeProp: _detailDTODeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
@@ -37,7 +34,7 @@ const DetailDTOSchema = CollectionSchema(
   getId: _detailDTOGetId,
   getLinks: _detailDTOGetLinks,
   attach: _detailDTOAttach,
-  version: '3.0.0-dev.14',
+  version: '3.0.0',
 );
 
 int _detailDTOEstimateSize(
@@ -50,19 +47,18 @@ int _detailDTOEstimateSize(
   return bytesCount;
 }
 
-int _detailDTOSerializeNative(
+void _detailDTOSerialize(
   DetailDTO object,
-  IsarBinaryWriter writer,
+  IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.html);
-  return writer.usedBytes;
 }
 
-DetailDTO _detailDTODeserializeNative(
+DetailDTO _detailDTODeserialize(
   Id id,
-  IsarBinaryReader reader,
+  IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -73,8 +69,8 @@ DetailDTO _detailDTODeserializeNative(
   return object;
 }
 
-P _detailDTODeserializePropNative<P>(
-  IsarBinaryReader reader,
+P _detailDTODeserializeProp<P>(
+  IsarReader reader,
   int propertyId,
   int offset,
   Map<Type, List<int>> allOffsets,
@@ -87,27 +83,8 @@ P _detailDTODeserializePropNative<P>(
   }
 }
 
-Object _detailDTOSerializeWeb(
-    IsarCollection<DetailDTO> collection, DetailDTO object) {
-  /*final jsObj = IsarNative.newJsObject();*/ throw UnimplementedError();
-}
-
-DetailDTO _detailDTODeserializeWeb(
-    IsarCollection<DetailDTO> collection, Object jsObj) {
-  /*final object = DetailDTO(html: IsarNative.jsObjectGet(jsObj, r'html') ?? '',id: IsarNative.jsObjectGet(jsObj, r'id') ,);*/
-  //return object;
-  throw UnimplementedError();
-}
-
-P _detailDTODeserializePropWeb<P>(Object jsObj, String propertyName) {
-  switch (propertyName) {
-    default:
-      throw IsarError('Illegal propertyName');
-  }
-}
-
 Id _detailDTOGetId(DetailDTO object) {
-  return object.id ?? Isar.autoIncrement;
+  return object.id;
 }
 
 List<IsarLinkBase<dynamic>> _detailDTOGetLinks(DetailDTO object) {
@@ -127,7 +104,7 @@ extension DetailDTOQueryWhereSort
 
 extension DetailDTOQueryWhere
     on QueryBuilder<DetailDTO, DetailDTO, QWhereClause> {
-  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idEqualTo(int id) {
+  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -136,7 +113,7 @@ extension DetailDTOQueryWhere
     });
   }
 
-  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idNotEqualTo(int id) {
+  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idNotEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -158,7 +135,7 @@ extension DetailDTOQueryWhere
     });
   }
 
-  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idGreaterThan(int id,
+  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idGreaterThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -167,7 +144,7 @@ extension DetailDTOQueryWhere
     });
   }
 
-  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idLessThan(int id,
+  QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -177,8 +154,8 @@ extension DetailDTOQueryWhere
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterWhereClause> idBetween(
-    int lowerId,
-    int upperId, {
+    Id lowerId,
+    Id upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -325,24 +302,8 @@ extension DetailDTOQueryFilter
     });
   }
 
-  QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idEqualTo(
-      int? value) {
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -352,7 +313,7 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idGreaterThan(
-    int? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -365,7 +326,7 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idLessThan(
-    int? value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -378,8 +339,8 @@ extension DetailDTOQueryFilter
   }
 
   QueryBuilder<DetailDTO, DetailDTO, QAfterFilterCondition> idBetween(
-    int? lower,
-    int? upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

@@ -15,7 +15,7 @@ abstract class DetailRemoteService {
   final HeaderCache _headerCache;
 
   @protected
-  _RemoteMarkdown getDetail(String fullPathToMarkdownFile) async {
+  _RemoteMarkdown getDetail(int id, String fullPathToMarkdownFile) async {
     final requestUri = Uri.https(_dio.options.baseUrl, fullPathToMarkdownFile);
     final cachedHeader = await _headerCache.getHeader(fullPathToMarkdownFile);
 
@@ -31,7 +31,11 @@ abstract class DetailRemoteService {
 
       switch (response.statusCode) {
         case 200:
-          final header = GithubHeader.parse(response, fullPathToMarkdownFile);
+          final header = GithubHeader.parse(
+            id,
+            response,
+            fullPathToMarkdownFile,
+          );
           await _headerCache.saveHeader(header);
           final html = response.data!;
           return RemoteResponse.withNewData(html);
