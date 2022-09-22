@@ -5,22 +5,27 @@ enum FlutterDetailStatus { initial, loading, success, failure }
 class FlutterDetailState extends Equatable {
   const FlutterDetailState({
     this.status = FlutterDetailStatus.initial,
-    this.detail = const Fresh.yes(entity: null),
+    this.detail = const Fresh.yes(entity: Detail.empty),
+    this.failureMessage,
   });
 
   final FlutterDetailStatus status;
   final Fresh<Detail?> detail;
+  final String? failureMessage;
 
   FlutterDetailState copyWith({
-    FlutterDetailStatus? status,
-    Fresh<Detail?>? detail,
+    FlutterDetailStatus Function()? status,
+    Fresh<Detail?> Function()? detail,
+    String? Function()? failureMessage,
   }) {
     return FlutterDetailState(
-      status: status ?? this.status,
-      detail: detail ?? this.detail,
+      status: status != null ? status() : this.status,
+      detail: detail != null ? detail() : this.detail,
+      failureMessage:
+          failureMessage != null ? failureMessage() : this.failureMessage,
     );
   }
 
   @override
-  List<Object?> get props => [status, detail];
+  List<Object?> get props => [status, detail, failureMessage];
 }

@@ -19,12 +19,14 @@ class FlutterDetailBloc extends Bloc<FlutterDetailEvent, FlutterDetailState> {
   })  : _repository = repository,
         super(const FlutterDetailState()) {
     on<FlutterDetailEvent>(
-      (event, emit) {
-        event.when<Future<void>>(
-          flutterWhatsNewDetailRequested: (id) =>
-              _onFlutterWhatsNewDetailRequested(emit, id),
-          flutterReleaseNotesDetailRequested: (id) =>
-              _onFlutterReleaseNotesDetailRequested(emit, id),
+      (event, emit) async {
+        await event.when<Future<void>>(
+          flutterWhatsNewDetailRequested: (id) {
+            return _onFlutterWhatsNewDetailRequested(emit, id);
+          },
+          flutterReleaseNotesDetailRequested: (id) {
+            return _onFlutterReleaseNotesDetailRequested(emit, id);
+          },
         );
       },
     );
@@ -59,11 +61,24 @@ class FlutterDetailBloc extends Bloc<FlutterDetailEvent, FlutterDetailState> {
     Emitter<FlutterDetailState> emit,
     int id,
   ) async {
-    emit(state.copyWith(status: FlutterDetailStatus.loading));
+    emit(state.copyWith(status: () => FlutterDetailStatus.loading));
     final failureOrSuccessDetail = await caller(id);
     return failureOrSuccessDetail.fold(
-      (failure) => emit(state.copyWith(status: FlutterDetailStatus.failure)),
-      (detail) => emit(state.copyWith(detail: detail)),
+      (failure) => emit(
+        state.copyWith(
+          status: () => FlutterDetailStatus.failure,
+          failureMessage: () => failure.when<String>(
+            api: (errorCode) => 'API returned $errorCode',
+          ),
+        ),
+      ),
+      (detail) => emit(
+        state.copyWith(
+          status: () => FlutterDetailStatus.success,
+          detail: () => detail,
+          failureMessage: () => null,
+        ),
+      ),
     );
   }
 }

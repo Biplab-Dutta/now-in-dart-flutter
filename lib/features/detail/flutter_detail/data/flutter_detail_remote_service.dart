@@ -9,15 +9,15 @@ class FlutterDetailRemoteService extends DetailRemoteService {
     super.headerCache,
   });
 
-  _FlutterDetail getWhatsNewFlutterDetail() {
+  _FlutterDetail getWhatsNewFlutterDetail(int id) {
     const fullPathToMarkdownFile =
         'repos/flutter/website/contents/src/whats-new.md';
-    return super.getDetail(fullPathToMarkdownFile);
+    return super.getDetail(id, fullPathToMarkdownFile);
   }
 
-  _FlutterDetail getFlutterReleaseNotesDetail() {
+  _FlutterDetail getFlutterReleaseNotesDetail(int id) {
     const fullPathToMarkdownFile =
         'repos/flutter/website/contents/src/development/tools/sdk/release-notes/index.md';
-    return super.getDetail(fullPathToMarkdownFile);
+    return super.getDetail(id, fullPathToMarkdownFile);
   }
 }

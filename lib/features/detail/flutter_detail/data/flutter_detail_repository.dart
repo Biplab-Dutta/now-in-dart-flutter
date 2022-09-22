@@ -21,31 +21,31 @@ class FlutterDetailRepository {
   final FlutterDetailRemoteService _remoteService;
 
   _FlutterDetailOrFailure getWhatsNewFlutterDetail(int id) {
-    return _getFlutterDetail(_remoteService.getWhatsNewFlutterDetail, id);
+    return _getFlutterDetail(id, _remoteService.getWhatsNewFlutterDetail);
   }
 
   _FlutterDetailOrFailure getFlutterReleaseNotesDetail(int id) {
-    return _getFlutterDetail(_remoteService.getFlutterReleaseNotesDetail, id);
+    return _getFlutterDetail(id, _remoteService.getFlutterReleaseNotesDetail);
   }
 
   _FlutterDetailOrFailure _getFlutterDetail(
-    Future<RemoteResponse<String>> Function() caller,
     int id,
+    Future<RemoteResponse<String>> Function(int) caller,
   ) async {
     try {
-      final remoteResponse = await caller();
+      final remoteResponse = await caller(id);
       return right(
         await remoteResponse.when(
           noConnection: () async {
             final dto = await _localService.getFlutterDetail(id);
-            return Fresh.no(entity: dto?.toDomain());
+            return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
           },
           notModified: () async {
             final cachedData = await _localService.getFlutterDetail(id);
-            return Fresh.yes(entity: cachedData?.toDomain());
+            return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
           },
           withNewData: (html) async {
-            final dto = DetailDTO(id: id, html: html);
+            final dto = DetailDTO.parseHtml(id, html);
             await _localService.upsertFlutterDetail(dto);
             return Fresh.yes(entity: dto.toDomain());
           },
