@@ -10,12 +10,12 @@ class DartDetailState extends Equatable {
   });
 
   final DartDetailStatus status;
-  final Fresh<Detail?> detail;
+  final Fresh<Detail> detail;
   final String? failureMessage;
 
   DartDetailState copyWith({
     DartDetailStatus Function()? status,
-    Fresh<Detail?> Function()? detail,
+    Fresh<Detail> Function()? detail,
     String? Function()? failureMessage,
   }) {
     return DartDetailState(

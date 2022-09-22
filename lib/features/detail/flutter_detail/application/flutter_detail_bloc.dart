@@ -11,7 +11,7 @@ part 'flutter_detail_bloc.freezed.dart';
 part 'flutter_detail_event.dart';
 part 'flutter_detail_state.dart';
 
-typedef _DetailFailureOrSuccess = Future<Either<DetailFailure, Fresh<Detail?>>>;
+typedef _DetailFailureOrSuccess = Future<Either<DetailFailure, Fresh<Detail>>>;
 
 class FlutterDetailBloc extends Bloc<FlutterDetailEvent, FlutterDetailState> {
   FlutterDetailBloc({

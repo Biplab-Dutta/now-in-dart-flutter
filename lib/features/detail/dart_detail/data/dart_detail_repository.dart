@@ -7,7 +7,7 @@ import 'package:now_in_dart_flutter/features/detail/core/domain/detail_failure.d
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_local_service.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_remote_service.dart';
 
-typedef _DartDetailOrFailure = Future<Either<DetailFailure, Fresh<Detail?>>>;
+typedef _DartDetailOrFailure = Future<Either<DetailFailure, Fresh<Detail>>>;
 
 class DartDetailRepository {
   DartDetailRepository({
