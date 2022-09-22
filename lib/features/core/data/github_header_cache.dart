@@ -21,7 +21,7 @@ class GithubHeaderCache implements HeaderCache {
   @override
   Future<void> saveHeader(GithubHeader header) {
     return _isar.writeTxn<int>(
-      () async => await _githubHeaders.put(header),
+      () => _githubHeaders.put(header),
       silent: true,
     );
   }
