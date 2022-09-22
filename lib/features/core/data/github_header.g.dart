@@ -7,7 +7,7 @@ part of 'github_header.dart';
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, avoid_js_rounded_ints, prefer_final_locals
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters
 
 extension GetGithubHeaderCollection on Isar {
   IsarCollection<GithubHeader> get githubHeaders => this.collection();
@@ -29,12 +29,9 @@ const GithubHeaderSchema = CollectionSchema(
     )
   },
   estimateSize: _githubHeaderEstimateSize,
-  serializeNative: _githubHeaderSerializeNative,
-  deserializeNative: _githubHeaderDeserializeNative,
-  deserializePropNative: _githubHeaderDeserializePropNative,
-  serializeWeb: _githubHeaderSerializeWeb,
-  deserializeWeb: _githubHeaderDeserializeWeb,
-  deserializePropWeb: _githubHeaderDeserializePropWeb,
+  serialize: _githubHeaderSerialize,
+  deserialize: _githubHeaderDeserialize,
+  deserializeProp: _githubHeaderDeserializeProp,
   idName: r'id',
   indexes: {
     r'path': IndexSchema(
@@ -56,7 +53,7 @@ const GithubHeaderSchema = CollectionSchema(
   getId: _githubHeaderGetId,
   getLinks: _githubHeaderGetLinks,
   attach: _githubHeaderAttach,
-  version: '3.0.0-dev.14',
+  version: '3.0.0',
 );
 
 int _githubHeaderEstimateSize(
@@ -70,32 +67,32 @@ int _githubHeaderEstimateSize(
   return bytesCount;
 }
 
-int _githubHeaderSerializeNative(
+void _githubHeaderSerialize(
   GithubHeader object,
-  IsarBinaryWriter writer,
+  IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.eTag);
   writer.writeString(offsets[1], object.path);
-  return writer.usedBytes;
 }
 
-GithubHeader _githubHeaderDeserializeNative(
+GithubHeader _githubHeaderDeserialize(
   Id id,
-  IsarBinaryReader reader,
+  IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
   final object = GithubHeader(
     eTag: reader.readString(offsets[0]),
+    id: id,
     path: reader.readString(offsets[1]),
   );
   return object;
 }
 
-P _githubHeaderDeserializePropNative<P>(
-  IsarBinaryReader reader,
+P _githubHeaderDeserializeProp<P>(
+  IsarReader reader,
   int propertyId,
   int offset,
   Map<Type, List<int>> allOffsets,
@@ -107,25 +104,6 @@ P _githubHeaderDeserializePropNative<P>(
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
-  }
-}
-
-Object _githubHeaderSerializeWeb(
-    IsarCollection<GithubHeader> collection, GithubHeader object) {
-  /*final jsObj = IsarNative.newJsObject();*/ throw UnimplementedError();
-}
-
-GithubHeader _githubHeaderDeserializeWeb(
-    IsarCollection<GithubHeader> collection, Object jsObj) {
-  /*final object = GithubHeader(eTag: IsarNative.jsObjectGet(jsObj, r'eTag') ?? '',path: IsarNative.jsObjectGet(jsObj, r'path') ?? '',);*/
-  //return object;
-  throw UnimplementedError();
-}
-
-P _githubHeaderDeserializePropWeb<P>(Object jsObj, String propertyName) {
-  switch (propertyName) {
-    default:
-      throw IsarError('Illegal propertyName');
   }
 }
 
@@ -177,19 +155,19 @@ extension GithubHeaderByIndex on IsarCollection<GithubHeader> {
     return deleteAllByIndexSync(r'path', values);
   }
 
-  Future<int> putByPath(GithubHeader object) {
+  Future<Id> putByPath(GithubHeader object) {
     return putByIndex(r'path', object);
   }
 
-  int putByPathSync(GithubHeader object, {bool saveLinks = true}) {
+  Id putByPathSync(GithubHeader object, {bool saveLinks = true}) {
     return putByIndexSync(r'path', object, saveLinks: saveLinks);
   }
 
-  Future<List<int>> putAllByPath(List<GithubHeader> objects) {
+  Future<List<Id>> putAllByPath(List<GithubHeader> objects) {
     return putAllByIndex(r'path', objects);
   }
 
-  List<int> putAllByPathSync(List<GithubHeader> objects,
+  List<Id> putAllByPathSync(List<GithubHeader> objects,
       {bool saveLinks = true}) {
     return putAllByIndexSync(r'path', objects, saveLinks: saveLinks);
   }
@@ -206,8 +184,7 @@ extension GithubHeaderQueryWhereSort
 
 extension GithubHeaderQueryWhere
     on QueryBuilder<GithubHeader, GithubHeader, QWhereClause> {
-  QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idEqualTo(
-      int id) {
+  QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idEqualTo(Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -217,7 +194,7 @@ extension GithubHeaderQueryWhere
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idNotEqualTo(
-      int id) {
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
@@ -240,7 +217,7 @@ extension GithubHeaderQueryWhere
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idGreaterThan(
-      int id,
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -249,7 +226,7 @@ extension GithubHeaderQueryWhere
     });
   }
 
-  QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idLessThan(int id,
+  QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idLessThan(Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -259,8 +236,8 @@ extension GithubHeaderQueryWhere
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterWhereClause> idBetween(
-    int lowerId,
-    int upperId, {
+    Id lowerId,
+    Id upperId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -457,7 +434,7 @@ extension GithubHeaderQueryFilter
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterFilterCondition> idEqualTo(
-      int value) {
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -467,7 +444,7 @@ extension GithubHeaderQueryFilter
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterFilterCondition> idGreaterThan(
-    int value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -480,7 +457,7 @@ extension GithubHeaderQueryFilter
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterFilterCondition> idLessThan(
-    int value, {
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -493,8 +470,8 @@ extension GithubHeaderQueryFilter
   }
 
   QueryBuilder<GithubHeader, GithubHeader, QAfterFilterCondition> idBetween(
-    int lower,
-    int upper, {
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {

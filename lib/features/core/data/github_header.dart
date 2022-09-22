@@ -7,12 +7,14 @@ part 'github_header.g.dart';
 @Collection(inheritance: false)
 class GithubHeader extends Equatable {
   const GithubHeader({
+    required this.id,
     required this.eTag,
     required this.path,
-  }) : id = Isar.autoIncrement;
+  });
 
-  factory GithubHeader.parse(Response response, String path) {
+  factory GithubHeader.parse(int id, Response<String> response, String path) {
     return GithubHeader(
+      id: id,
       eTag: response.headers.map['ETag']![0],
       path: path,
     );
@@ -31,5 +33,5 @@ class GithubHeader extends Equatable {
 
   @ignore
   @override
-  List<Object?> get props => [eTag, path, id];
+  List<Object?> get props => [id, eTag, path];
 }
