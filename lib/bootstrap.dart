@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:developer' as dev show log;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,10 @@ void bootstrap(_BootstrapBuilder builder) {
   Bloc.observer = AppBlocObserver();
 
   FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    dev.log(
+      details.exceptionAsString(),
+      stackTrace: details.stack,
+    );
   };
 
   runZonedGuarded(
@@ -32,6 +35,9 @@ void bootstrap(_BootstrapBuilder builder) {
         );
       runApp(builder(dio));
     },
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
+    (error, stackTrace) => dev.log(
+      error.toString(),
+      stackTrace: stackTrace,
+    ),
   );
 }
