@@ -16,7 +16,7 @@ class DetailDTO extends Equatable {
   /// isn't parsed. So, we need to convert `%7B%7Bsite.url%7D%7D` to
   /// `https://docs.flutter.dev`.
   ///
-  /// The mappings will have to be done as in accordance to [_mappings].
+  /// The mappings will have to be done in accordance to [_mappings].
   factory DetailDTO.parseHtml(int id, String html) {
     final parsedHtml = _mappings.entries.fold(
       html,
