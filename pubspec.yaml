@@ -21,9 +21,9 @@ dependencies:
   freezed_annotation: ^2.1.0
   isar: ^3.0.0
   isar_flutter_libs: ^3.0.0
+  meta: ^1.8.0
   url_launcher: ^6.1.5
   webview_flutter: ^3.0.4
-  meta: ^1.8.0
 
 dev_dependencies:
   flutter_test:
