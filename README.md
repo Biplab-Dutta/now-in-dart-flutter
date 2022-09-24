@@ -1,16 +1,11 @@
 # now_in_dart_flutter
 
-A new Flutter project.
+### Online App Demo
 
-## Getting Started
+https://user-images.githubusercontent.com/63902683/192081298-78bb3e31-10ed-4150-b726-e9181b240346.mp4
 
-This project is a starting point for a Flutter application.
+### Offline App Demo
 
-A few resources to get you started if this is your first Flutter project:
+https://user-images.githubusercontent.com/63902683/192081334-09f4be61-e836-4661-9aa9-cacce7c50739.mp4
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+New Readme is being added soon...
