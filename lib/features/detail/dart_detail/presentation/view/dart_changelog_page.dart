@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:now_in_dart_flutter/features/core/data/id.dart';
-import 'package:now_in_dart_flutter/features/core/presentattion/no_connection_toast.dart';
-import 'package:now_in_dart_flutter/features/core/presentattion/no_results_display.dart';
+import 'package:now_in_dart_flutter/features/core/presentation/no_connection_toast.dart';
+import 'package:now_in_dart_flutter/features/core/presentation/no_results_display.dart';
 import 'package:now_in_dart_flutter/features/detail/core/presentation/widget/detail_webview.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/application/dart_detail_bloc.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_repository.dart';
