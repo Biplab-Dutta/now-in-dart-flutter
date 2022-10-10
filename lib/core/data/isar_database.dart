@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:now_in_dart_flutter/features/core/data/github_header.dart';
+import 'package:now_in_dart_flutter/core/data/github_header.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
 
 class IsarDatabase {

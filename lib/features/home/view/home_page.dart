@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:now_in_dart_flutter/features/core/presentation/assets_path.dart';
-import 'package:now_in_dart_flutter/features/core/presentation/lazy_indexed_stack.dart';
+import 'package:now_in_dart_flutter/core/presentation/assets_path.dart';
+import 'package:now_in_dart_flutter/core/presentation/lazy_indexed_stack.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/presentation/view/dart_changelog_page.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/presentation/view/flutter_detail_page.dart';
 import 'package:now_in_dart_flutter/features/home/cubit/home_cubit.dart';

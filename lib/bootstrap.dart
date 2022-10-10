@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:now_in_dart_flutter/app/app_bloc_observer.dart';
-import 'package:now_in_dart_flutter/features/core/data/data.dart';
+import 'package:now_in_dart_flutter/core/data/data.dart';
 
 typedef _BootstrapBuilder = Widget Function(Dio dio);
 

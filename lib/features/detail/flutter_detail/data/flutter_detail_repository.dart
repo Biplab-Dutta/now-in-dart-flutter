@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:now_in_dart_flutter/features/core/data/network_exception.dart';
-import 'package:now_in_dart_flutter/features/core/data/remote_response.dart';
-import 'package:now_in_dart_flutter/features/core/domain/fresh.dart';
+import 'package:now_in_dart_flutter/core/data/network_exception.dart';
+import 'package:now_in_dart_flutter/core/data/remote_response.dart';
+import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail_failure.dart';

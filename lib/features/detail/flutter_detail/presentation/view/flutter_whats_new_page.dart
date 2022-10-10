@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:now_in_dart_flutter/features/core/data/id.dart';
+import 'package:now_in_dart_flutter/core/data/id.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/application/flutter_detail_bloc.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/presentation/view/flutter_detail_common.dart';
 

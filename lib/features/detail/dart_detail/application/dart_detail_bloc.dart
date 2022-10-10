@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:now_in_dart_flutter/features/core/domain/fresh.dart';
+import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_repository.dart';
 

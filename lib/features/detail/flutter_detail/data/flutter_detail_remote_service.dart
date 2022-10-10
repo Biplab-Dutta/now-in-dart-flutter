@@ -1,4 +1,4 @@
-import 'package:now_in_dart_flutter/features/core/data/remote_response.dart';
+import 'package:now_in_dart_flutter/core/data/remote_response.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_remote_service.dart';
 
 typedef _FlutterDetail = Future<RemoteResponse<String>>;

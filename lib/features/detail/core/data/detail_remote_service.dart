@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:now_in_dart_flutter/features/core/data/data.dart';
+import 'package:now_in_dart_flutter/core/data/data.dart';
 
 typedef _RemoteMarkdown = Future<RemoteResponse<String>>;
 

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:now_in_dart_flutter/features/core/domain/fresh.dart';
+import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail_failure.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/data/flutter_detail_repository.dart';

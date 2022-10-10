@@ -1,6 +1,6 @@
 import 'package:isar/isar.dart';
-import 'package:now_in_dart_flutter/features/core/data/github_header.dart';
-import 'package:now_in_dart_flutter/features/core/data/isar_database.dart';
+import 'package:now_in_dart_flutter/core/data/github_header.dart';
+import 'package:now_in_dart_flutter/core/data/isar_database.dart';
 
 abstract class HeaderCache {
   Future<void> saveHeader(GithubHeader header);
