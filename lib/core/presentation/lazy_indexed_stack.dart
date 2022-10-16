@@ -10,7 +10,7 @@ class LazyIndexedStack extends StatefulWidget {
     this.children = const [],
   });
 
-  final int? index;
+  final int index;
 
   final List<Widget> children;
 
