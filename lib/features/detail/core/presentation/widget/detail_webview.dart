@@ -16,14 +16,8 @@ class DetailWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      javascriptMode: JavascriptMode.unrestricted,
-      navigationDelegate: (navReq) {
-        launchUrl(Uri.parse(navReq.url));
-        return NavigationDecision.prevent;
-      },
-      initialUrl: Uri.dataFromString(
-        '''
+    final url = Uri.dataFromString(
+      '''
          <html>
          <head>
            <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,9 +26,19 @@ class DetailWebView extends StatelessWidget {
          </html>
          $_css
         ''',
-        mimeType: 'text/html',
-        encoding: utf8,
-      ).toString(),
+      mimeType: 'text/html',
+      encoding: utf8,
+    ).toString();
+    return WebView(
+      javascriptMode: JavascriptMode.unrestricted,
+      navigationDelegate: (navReq) {
+        if (navReq.url == url) {
+          return NavigationDecision.navigate;
+        }
+        launchUrl(Uri.parse(navReq.url));
+        return NavigationDecision.prevent;
+      },
+      initialUrl: url,
       gestureRecognizers: const {
         Factory<VerticalDragGestureRecognizer>(
           VerticalDragGestureRecognizer.new,
