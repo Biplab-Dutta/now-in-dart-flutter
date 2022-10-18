@@ -29,16 +29,42 @@ class HomeView extends StatelessWidget {
     final selectedTabIndex = context.select<HomeCubit, int>(
       (HomeCubit cubit) => cubit.state.index,
     );
-    return Scaffold(
-      body: LazyIndexedStack(
-        index: selectedTabIndex,
-        children: pages,
-      ),
-      bottomNavigationBar: NavigationBar(
-        destinations: _destinations,
-        selectedIndex: selectedTabIndex,
-        onDestinationSelected: context.read<HomeCubit>().setTab,
-      ),
+
+    return OrientationBuilder(
+      builder: (_, orientation) {
+        if (orientation == Orientation.portrait) {
+          return Scaffold(
+            body: LazyIndexedStack(
+              index: selectedTabIndex,
+              children: pages,
+            ),
+            bottomNavigationBar: NavigationBar(
+              destinations: _destinations,
+              selectedIndex: selectedTabIndex,
+              onDestinationSelected: context.read<HomeCubit>().setTab,
+            ),
+          );
+        }
+        return Scaffold(
+          body: Row(
+            children: [
+              NavigationRail(
+                destinations: _railDestinations,
+                selectedIndex: selectedTabIndex,
+                groupAlignment: 0,
+                onDestinationSelected: context.read<HomeCubit>().setTab,
+              ),
+              const VerticalDivider(thickness: 1, width: 1),
+              Expanded(
+                child: LazyIndexedStack(
+                  index: selectedTabIndex,
+                  children: pages,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -58,6 +84,25 @@ class HomeView extends StatelessWidget {
         height: 24,
       ),
       label: 'Flutter',
+    ),
+  ];
+
+  static final _railDestinations = <NavigationRailDestination>[
+    NavigationRailDestination(
+      icon: SvgPicture.asset(
+        AssetsPath.dartIcon,
+        width: 24,
+        height: 24,
+      ),
+      label: const Text('Dart'),
+    ),
+    NavigationRailDestination(
+      icon: SvgPicture.asset(
+        AssetsPath.flutterIcon,
+        width: 24,
+        height: 24,
+      ),
+      label: const Text('Flutter'),
     ),
   ];
 }
