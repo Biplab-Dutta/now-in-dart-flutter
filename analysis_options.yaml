@@ -6,6 +6,7 @@ linter:
     avoid_private_typedef_functions: false
     library_private_types_in_public_api: false
     sort_pub_dependencies: false
+    avoid_multiple_declarations_per_line: false
 
 analyzer:
   exclude:
