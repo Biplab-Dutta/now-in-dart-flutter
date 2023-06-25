@@ -29,22 +29,27 @@ class DetailWebView extends StatelessWidget {
       mimeType: 'text/html',
       encoding: utf8,
     ).toString();
-    return WebView(
-      javascriptMode: JavascriptMode.unrestricted,
-      navigationDelegate: (navReq) {
-        if (navReq.url == url) {
-          return NavigationDecision.navigate;
-        }
-        launchUrl(Uri.parse(navReq.url));
-        return NavigationDecision.prevent;
-      },
-      initialUrl: url,
+    return WebViewWidget(
+      controller: WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onNavigationRequest: (navReq) {
+              if (navReq.url == url) {
+                return NavigationDecision.navigate;
+              }
+              launchUrl(Uri.parse(navReq.url));
+              return NavigationDecision.prevent;
+            },
+          ),
+        )
+        ..loadRequest(Uri.parse(url))
+        ..enableZoom(false),
       gestureRecognizers: const {
         Factory<VerticalDragGestureRecognizer>(
           VerticalDragGestureRecognizer.new,
         ),
       },
-      zoomEnabled: false,
     );
   }
 
