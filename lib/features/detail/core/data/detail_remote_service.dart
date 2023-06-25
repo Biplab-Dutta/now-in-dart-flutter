@@ -46,7 +46,7 @@ abstract class DetailRemoteService {
         default:
           throw RestApiException(response.statusCode);
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.isNoConnectionError) {
         return const RemoteResponse.noConnection();
       } else if (e.response != null) {
