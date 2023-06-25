@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'flutter_detail_bloc.dart';
 
@@ -25,8 +25,8 @@ mixin _$FlutterDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int id)? flutterWhatsNewDetailRequested,
-    TResult Function(int id)? flutterReleaseNotesDetailRequested,
+    TResult? Function(int id)? flutterWhatsNewDetailRequested,
+    TResult? Function(int id)? flutterReleaseNotesDetailRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,9 +46,9 @@ mixin _$FlutterDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FlutterWhatsNewDetailRequested value)?
+    TResult? Function(_FlutterWhatsNewDetailRequested value)?
         flutterWhatsNewDetailRequested,
-    TResult Function(_FlutterReleaseNotesDetailRequested value)?
+    TResult? Function(_FlutterReleaseNotesDetailRequested value)?
         flutterReleaseNotesDetailRequested,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,29 +71,32 @@ mixin _$FlutterDetailEvent {
 abstract class $FlutterDetailEventCopyWith<$Res> {
   factory $FlutterDetailEventCopyWith(
           FlutterDetailEvent value, $Res Function(FlutterDetailEvent) then) =
-      _$FlutterDetailEventCopyWithImpl<$Res>;
+      _$FlutterDetailEventCopyWithImpl<$Res, FlutterDetailEvent>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class _$FlutterDetailEventCopyWithImpl<$Res>
+class _$FlutterDetailEventCopyWithImpl<$Res, $Val extends FlutterDetailEvent>
     implements $FlutterDetailEventCopyWith<$Res> {
   _$FlutterDetailEventCopyWithImpl(this._value, this._then);
 
-  final FlutterDetailEvent _value;
   // ignore: unused_field
-  final $Res Function(FlutterDetailEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -105,28 +108,27 @@ abstract class _$$_FlutterWhatsNewDetailRequestedCopyWith<$Res>
           $Res Function(_$_FlutterWhatsNewDetailRequested) then) =
       __$$_FlutterWhatsNewDetailRequestedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
 class __$$_FlutterWhatsNewDetailRequestedCopyWithImpl<$Res>
-    extends _$FlutterDetailEventCopyWithImpl<$Res>
+    extends _$FlutterDetailEventCopyWithImpl<$Res,
+        _$_FlutterWhatsNewDetailRequested>
     implements _$$_FlutterWhatsNewDetailRequestedCopyWith<$Res> {
   __$$_FlutterWhatsNewDetailRequestedCopyWithImpl(
       _$_FlutterWhatsNewDetailRequested _value,
       $Res Function(_$_FlutterWhatsNewDetailRequested) _then)
-      : super(_value, (v) => _then(v as _$_FlutterWhatsNewDetailRequested));
+      : super(_value, _then);
 
-  @override
-  _$_FlutterWhatsNewDetailRequested get _value =>
-      super._value as _$_FlutterWhatsNewDetailRequested;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_$_FlutterWhatsNewDetailRequested(
-      id == freezed
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -153,15 +155,15 @@ class _$_FlutterWhatsNewDetailRequested
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FlutterWhatsNewDetailRequested &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FlutterWhatsNewDetailRequestedCopyWith<_$_FlutterWhatsNewDetailRequested>
       get copyWith => __$$_FlutterWhatsNewDetailRequestedCopyWithImpl<
           _$_FlutterWhatsNewDetailRequested>(this, _$identity);
@@ -178,8 +180,8 @@ class _$_FlutterWhatsNewDetailRequested
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int id)? flutterWhatsNewDetailRequested,
-    TResult Function(int id)? flutterReleaseNotesDetailRequested,
+    TResult? Function(int id)? flutterWhatsNewDetailRequested,
+    TResult? Function(int id)? flutterReleaseNotesDetailRequested,
   }) {
     return flutterWhatsNewDetailRequested?.call(id);
   }
@@ -211,9 +213,9 @@ class _$_FlutterWhatsNewDetailRequested
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FlutterWhatsNewDetailRequested value)?
+    TResult? Function(_FlutterWhatsNewDetailRequested value)?
         flutterWhatsNewDetailRequested,
-    TResult Function(_FlutterReleaseNotesDetailRequested value)?
+    TResult? Function(_FlutterReleaseNotesDetailRequested value)?
         flutterReleaseNotesDetailRequested,
   }) {
     return flutterWhatsNewDetailRequested?.call(this);
@@ -255,28 +257,27 @@ abstract class _$$_FlutterReleaseNotesDetailRequestedCopyWith<$Res>
           $Res Function(_$_FlutterReleaseNotesDetailRequested) then) =
       __$$_FlutterReleaseNotesDetailRequestedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
 class __$$_FlutterReleaseNotesDetailRequestedCopyWithImpl<$Res>
-    extends _$FlutterDetailEventCopyWithImpl<$Res>
+    extends _$FlutterDetailEventCopyWithImpl<$Res,
+        _$_FlutterReleaseNotesDetailRequested>
     implements _$$_FlutterReleaseNotesDetailRequestedCopyWith<$Res> {
   __$$_FlutterReleaseNotesDetailRequestedCopyWithImpl(
       _$_FlutterReleaseNotesDetailRequested _value,
       $Res Function(_$_FlutterReleaseNotesDetailRequested) _then)
-      : super(_value, (v) => _then(v as _$_FlutterReleaseNotesDetailRequested));
+      : super(_value, _then);
 
-  @override
-  _$_FlutterReleaseNotesDetailRequested get _value =>
-      super._value as _$_FlutterReleaseNotesDetailRequested;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_$_FlutterReleaseNotesDetailRequested(
-      id == freezed
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -303,15 +304,15 @@ class _$_FlutterReleaseNotesDetailRequested
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FlutterReleaseNotesDetailRequested &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_FlutterReleaseNotesDetailRequestedCopyWith<
           _$_FlutterReleaseNotesDetailRequested>
       get copyWith => __$$_FlutterReleaseNotesDetailRequestedCopyWithImpl<
@@ -329,8 +330,8 @@ class _$_FlutterReleaseNotesDetailRequested
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int id)? flutterWhatsNewDetailRequested,
-    TResult Function(int id)? flutterReleaseNotesDetailRequested,
+    TResult? Function(int id)? flutterWhatsNewDetailRequested,
+    TResult? Function(int id)? flutterReleaseNotesDetailRequested,
   }) {
     return flutterReleaseNotesDetailRequested?.call(id);
   }
@@ -362,9 +363,9 @@ class _$_FlutterReleaseNotesDetailRequested
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FlutterWhatsNewDetailRequested value)?
+    TResult? Function(_FlutterWhatsNewDetailRequested value)?
         flutterWhatsNewDetailRequested,
-    TResult Function(_FlutterReleaseNotesDetailRequested value)?
+    TResult? Function(_FlutterReleaseNotesDetailRequested value)?
         flutterReleaseNotesDetailRequested,
   }) {
     return flutterReleaseNotesDetailRequested?.call(this);

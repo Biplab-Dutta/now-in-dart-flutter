@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'detail_failure.dart';
 
@@ -24,7 +24,7 @@ mixin _$DetailFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? errorCode)? api,
+    TResult? Function(int? errorCode)? api,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$DetailFailure {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Api value)? api,
+    TResult? Function(_Api value)? api,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,29 +59,32 @@ mixin _$DetailFailure {
 abstract class $DetailFailureCopyWith<$Res> {
   factory $DetailFailureCopyWith(
           DetailFailure value, $Res Function(DetailFailure) then) =
-      _$DetailFailureCopyWithImpl<$Res>;
+      _$DetailFailureCopyWithImpl<$Res, DetailFailure>;
+  @useResult
   $Res call({int? errorCode});
 }
 
 /// @nodoc
-class _$DetailFailureCopyWithImpl<$Res>
+class _$DetailFailureCopyWithImpl<$Res, $Val extends DetailFailure>
     implements $DetailFailureCopyWith<$Res> {
   _$DetailFailureCopyWithImpl(this._value, this._then);
 
-  final DetailFailure _value;
   // ignore: unused_field
-  final $Res Function(DetailFailure) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorCode = freezed,
   }) {
     return _then(_value.copyWith(
-      errorCode: errorCode == freezed
+      errorCode: freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as int?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -90,24 +93,24 @@ abstract class _$$_ApiCopyWith<$Res> implements $DetailFailureCopyWith<$Res> {
   factory _$$_ApiCopyWith(_$_Api value, $Res Function(_$_Api) then) =
       __$$_ApiCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int? errorCode});
 }
 
 /// @nodoc
-class __$$_ApiCopyWithImpl<$Res> extends _$DetailFailureCopyWithImpl<$Res>
+class __$$_ApiCopyWithImpl<$Res>
+    extends _$DetailFailureCopyWithImpl<$Res, _$_Api>
     implements _$$_ApiCopyWith<$Res> {
   __$$_ApiCopyWithImpl(_$_Api _value, $Res Function(_$_Api) _then)
-      : super(_value, (v) => _then(v as _$_Api));
+      : super(_value, _then);
 
-  @override
-  _$_Api get _value => super._value as _$_Api;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorCode = freezed,
   }) {
     return _then(_$_Api(
-      errorCode == freezed
+      freezed == errorCode
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -133,15 +136,16 @@ class _$_Api implements _Api {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Api &&
-            const DeepCollectionEquality().equals(other.errorCode, errorCode));
+            (identical(other.errorCode, errorCode) ||
+                other.errorCode == errorCode));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(errorCode));
+  int get hashCode => Object.hash(runtimeType, errorCode);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ApiCopyWith<_$_Api> get copyWith =>
       __$$_ApiCopyWithImpl<_$_Api>(this, _$identity);
 
@@ -156,7 +160,7 @@ class _$_Api implements _Api {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int? errorCode)? api,
+    TResult? Function(int? errorCode)? api,
   }) {
     return api?.call(errorCode);
   }
@@ -184,7 +188,7 @@ class _$_Api implements _Api {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Api value)? api,
+    TResult? Function(_Api value)? api,
   }) {
     return api?.call(this);
   }

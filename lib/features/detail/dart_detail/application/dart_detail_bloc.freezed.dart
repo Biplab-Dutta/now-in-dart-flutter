@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'dart_detail_bloc.dart';
 
@@ -24,7 +24,7 @@ mixin _$DartDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int id)? dartChangelogDetailRequested,
+    TResult? Function(int id)? dartChangelogDetailRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$DartDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DartChangelogDetailRequested value)?
+    TResult? Function(_DartChangelogDetailRequested value)?
         dartChangelogDetailRequested,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,29 +62,32 @@ mixin _$DartDetailEvent {
 abstract class $DartDetailEventCopyWith<$Res> {
   factory $DartDetailEventCopyWith(
           DartDetailEvent value, $Res Function(DartDetailEvent) then) =
-      _$DartDetailEventCopyWithImpl<$Res>;
+      _$DartDetailEventCopyWithImpl<$Res, DartDetailEvent>;
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class _$DartDetailEventCopyWithImpl<$Res>
+class _$DartDetailEventCopyWithImpl<$Res, $Val extends DartDetailEvent>
     implements $DartDetailEventCopyWith<$Res> {
   _$DartDetailEventCopyWithImpl(this._value, this._then);
 
-  final DartDetailEvent _value;
   // ignore: unused_field
-  final $Res Function(DartDetailEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -96,28 +99,26 @@ abstract class _$$_DartChangelogDetailRequestedCopyWith<$Res>
           $Res Function(_$_DartChangelogDetailRequested) then) =
       __$$_DartChangelogDetailRequestedCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id});
 }
 
 /// @nodoc
 class __$$_DartChangelogDetailRequestedCopyWithImpl<$Res>
-    extends _$DartDetailEventCopyWithImpl<$Res>
+    extends _$DartDetailEventCopyWithImpl<$Res, _$_DartChangelogDetailRequested>
     implements _$$_DartChangelogDetailRequestedCopyWith<$Res> {
   __$$_DartChangelogDetailRequestedCopyWithImpl(
       _$_DartChangelogDetailRequested _value,
       $Res Function(_$_DartChangelogDetailRequested) _then)
-      : super(_value, (v) => _then(v as _$_DartChangelogDetailRequested));
+      : super(_value, _then);
 
-  @override
-  _$_DartChangelogDetailRequested get _value =>
-      super._value as _$_DartChangelogDetailRequested;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
   }) {
     return _then(_$_DartChangelogDetailRequested(
-      id == freezed
+      null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
@@ -143,15 +144,15 @@ class _$_DartChangelogDetailRequested implements _DartChangelogDetailRequested {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DartChangelogDetailRequested &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+  int get hashCode => Object.hash(runtimeType, id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DartChangelogDetailRequestedCopyWith<_$_DartChangelogDetailRequested>
       get copyWith => __$$_DartChangelogDetailRequestedCopyWithImpl<
           _$_DartChangelogDetailRequested>(this, _$identity);
@@ -167,7 +168,7 @@ class _$_DartChangelogDetailRequested implements _DartChangelogDetailRequested {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(int id)? dartChangelogDetailRequested,
+    TResult? Function(int id)? dartChangelogDetailRequested,
   }) {
     return dartChangelogDetailRequested?.call(id);
   }
@@ -196,7 +197,7 @@ class _$_DartChangelogDetailRequested implements _DartChangelogDetailRequested {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DartChangelogDetailRequested value)?
+    TResult? Function(_DartChangelogDetailRequested value)?
         dartChangelogDetailRequested,
   }) {
     return dartChangelogDetailRequested?.call(this);

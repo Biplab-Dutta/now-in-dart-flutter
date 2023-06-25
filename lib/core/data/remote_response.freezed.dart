@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'remote_response.dart';
 
@@ -25,9 +25,9 @@ mixin _$RemoteResponse<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noConnection,
-    TResult Function()? notModified,
-    TResult Function(T data)? withNewData,
+    TResult? Function()? noConnection,
+    TResult? Function()? notModified,
+    TResult? Function(T data)? withNewData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$RemoteResponse<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_NotModified<T> value)? notModified,
-    TResult Function(_WithNewData<T> value)? withNewData,
+    TResult? Function(_NoConnection<T> value)? noConnection,
+    TResult? Function(_NotModified<T> value)? notModified,
+    TResult? Function(_WithNewData<T> value)? withNewData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,17 +66,18 @@ mixin _$RemoteResponse<T> {
 abstract class $RemoteResponseCopyWith<T, $Res> {
   factory $RemoteResponseCopyWith(
           RemoteResponse<T> value, $Res Function(RemoteResponse<T>) then) =
-      _$RemoteResponseCopyWithImpl<T, $Res>;
+      _$RemoteResponseCopyWithImpl<T, $Res, RemoteResponse<T>>;
 }
 
 /// @nodoc
-class _$RemoteResponseCopyWithImpl<T, $Res>
+class _$RemoteResponseCopyWithImpl<T, $Res, $Val extends RemoteResponse<T>>
     implements $RemoteResponseCopyWith<T, $Res> {
   _$RemoteResponseCopyWithImpl(this._value, this._then);
 
-  final RemoteResponse<T> _value;
   // ignore: unused_field
-  final $Res Function(RemoteResponse<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -88,14 +89,11 @@ abstract class _$$_NoConnectionCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_NoConnectionCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_NoConnection<T>>
     implements _$$_NoConnectionCopyWith<T, $Res> {
   __$$_NoConnectionCopyWithImpl(
       _$_NoConnection<T> _value, $Res Function(_$_NoConnection<T>) _then)
-      : super(_value, (v) => _then(v as _$_NoConnection<T>));
-
-  @override
-  _$_NoConnection<T> get _value => super._value as _$_NoConnection<T>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -130,9 +128,9 @@ class _$_NoConnection<T> implements _NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noConnection,
-    TResult Function()? notModified,
-    TResult Function(T data)? withNewData,
+    TResult? Function()? noConnection,
+    TResult? Function()? notModified,
+    TResult? Function(T data)? withNewData,
   }) {
     return noConnection?.call();
   }
@@ -164,9 +162,9 @@ class _$_NoConnection<T> implements _NoConnection<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_NotModified<T> value)? notModified,
-    TResult Function(_WithNewData<T> value)? withNewData,
+    TResult? Function(_NoConnection<T> value)? noConnection,
+    TResult? Function(_NotModified<T> value)? notModified,
+    TResult? Function(_WithNewData<T> value)? withNewData,
   }) {
     return noConnection?.call(this);
   }
@@ -199,14 +197,11 @@ abstract class _$$_NotModifiedCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_NotModifiedCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_NotModified<T>>
     implements _$$_NotModifiedCopyWith<T, $Res> {
   __$$_NotModifiedCopyWithImpl(
       _$_NotModified<T> _value, $Res Function(_$_NotModified<T>) _then)
-      : super(_value, (v) => _then(v as _$_NotModified<T>));
-
-  @override
-  _$_NotModified<T> get _value => super._value as _$_NotModified<T>;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -241,9 +236,9 @@ class _$_NotModified<T> implements _NotModified<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noConnection,
-    TResult Function()? notModified,
-    TResult Function(T data)? withNewData,
+    TResult? Function()? noConnection,
+    TResult? Function()? notModified,
+    TResult? Function(T data)? withNewData,
   }) {
     return notModified?.call();
   }
@@ -275,9 +270,9 @@ class _$_NotModified<T> implements _NotModified<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_NotModified<T> value)? notModified,
-    TResult Function(_WithNewData<T> value)? withNewData,
+    TResult? Function(_NoConnection<T> value)? noConnection,
+    TResult? Function(_NotModified<T> value)? notModified,
+    TResult? Function(_WithNewData<T> value)? withNewData,
   }) {
     return notModified?.call(this);
   }
@@ -306,26 +301,25 @@ abstract class _$$_WithNewDataCopyWith<T, $Res> {
   factory _$$_WithNewDataCopyWith(
           _$_WithNewData<T> value, $Res Function(_$_WithNewData<T>) then) =
       __$$_WithNewDataCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({T data});
 }
 
 /// @nodoc
 class __$$_WithNewDataCopyWithImpl<T, $Res>
-    extends _$RemoteResponseCopyWithImpl<T, $Res>
+    extends _$RemoteResponseCopyWithImpl<T, $Res, _$_WithNewData<T>>
     implements _$$_WithNewDataCopyWith<T, $Res> {
   __$$_WithNewDataCopyWithImpl(
       _$_WithNewData<T> _value, $Res Function(_$_WithNewData<T>) _then)
-      : super(_value, (v) => _then(v as _$_WithNewData<T>));
+      : super(_value, _then);
 
-  @override
-  _$_WithNewData<T> get _value => super._value as _$_WithNewData<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = freezed,
   }) {
     return _then(_$_WithNewData<T>(
-      data == freezed
+      freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
@@ -360,6 +354,7 @@ class _$_WithNewData<T> implements _WithNewData<T> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_WithNewDataCopyWith<T, _$_WithNewData<T>> get copyWith =>
       __$$_WithNewDataCopyWithImpl<T, _$_WithNewData<T>>(this, _$identity);
 
@@ -376,9 +371,9 @@ class _$_WithNewData<T> implements _WithNewData<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noConnection,
-    TResult Function()? notModified,
-    TResult Function(T data)? withNewData,
+    TResult? Function()? noConnection,
+    TResult? Function()? notModified,
+    TResult? Function(T data)? withNewData,
   }) {
     return withNewData?.call(data);
   }
@@ -410,9 +405,9 @@ class _$_WithNewData<T> implements _WithNewData<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NoConnection<T> value)? noConnection,
-    TResult Function(_NotModified<T> value)? notModified,
-    TResult Function(_WithNewData<T> value)? withNewData,
+    TResult? Function(_NoConnection<T> value)? noConnection,
+    TResult? Function(_NotModified<T> value)? notModified,
+    TResult? Function(_WithNewData<T> value)? withNewData,
   }) {
     return withNewData?.call(this);
   }
