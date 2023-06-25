@@ -1,4 +1,7 @@
 abstract class AssetsPath {
-  static const dartIcon = 'assets/icon_dart.svg';
-  static const flutterIcon = 'assets/icon_flutter.svg';
+  /// assets/icon_dart.svg.vec
+  static const dartIcon = 'assets/icon_dart.svg.vec';
+
+  /// assets/icon_flutter.svg.vec
+  static const flutterIcon = 'assets/icon_flutter.svg.vec';
 }
