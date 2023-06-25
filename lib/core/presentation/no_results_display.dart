@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class NoResultsDisplay extends StatelessWidget {
   const NoResultsDisplay({
-    super.key,
     required this.message,
+    super.key,
   });
 
   final String message;
@@ -22,7 +22,7 @@ class NoResultsDisplay extends StatelessWidget {
           ),
           Text(
             message,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
         ],
