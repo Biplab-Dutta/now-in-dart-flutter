@@ -8,6 +8,7 @@ import 'package:now_in_dart_flutter/core/presentation/responsive.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/presentation/view/dart_changelog_page.dart';
 import 'package:now_in_dart_flutter/features/detail/flutter_detail/presentation/view/flutter_detail_page.dart';
 import 'package:now_in_dart_flutter/features/home/cubit/home_cubit.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -98,17 +99,17 @@ class TabletOrDesktopView extends StatelessWidget {
 }
 
 final _destinations = <NavigationDestination>[
-  NavigationDestination(
-    icon: SvgPicture.asset(
-      AssetsPath.dartIcon,
+  const NavigationDestination(
+    icon: SvgPicture(
+      AssetBytesLoader(AssetsPath.dartIcon),
       width: 24,
       height: 24,
     ),
     label: 'Dart',
   ),
-  NavigationDestination(
-    icon: SvgPicture.asset(
-      AssetsPath.flutterIcon,
+  const NavigationDestination(
+    icon: SvgPicture(
+      AssetBytesLoader(AssetsPath.flutterIcon),
       width: 24,
       height: 24,
     ),
