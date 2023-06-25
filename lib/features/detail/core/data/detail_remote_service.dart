@@ -16,7 +16,7 @@ abstract class DetailRemoteService {
 
   @protected
   _RemoteMarkdown getDetail(int id, String fullPathToMarkdownFile) async {
-    final requestUri = Uri.https(_dio.options.baseUrl, fullPathToMarkdownFile);
+    final requestUri = Uri.parse(fullPathToMarkdownFile);
     final cachedHeader = await _headerCache.getHeader(fullPathToMarkdownFile);
 
     try {
