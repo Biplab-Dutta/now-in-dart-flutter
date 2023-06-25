@@ -10,8 +10,6 @@ import 'package:now_in_dart_flutter/core/data/data.dart';
 typedef _BootstrapBuilder = Widget Function(Dio dio);
 
 void bootstrap(_BootstrapBuilder builder) {
-  WidgetsFlutterBinding.ensureInitialized();
-
   Bloc.observer = AppBlocObserver();
 
   FlutterError.onError = (details) {
@@ -23,16 +21,17 @@ void bootstrap(_BootstrapBuilder builder) {
 
   runZonedGuarded(
     () async {
+      WidgetsFlutterBinding.ensureInitialized();
       await IsarDatabase().init();
       final dio = Dio()
         ..options = BaseOptions(
-          baseUrl: 'api.github.com',
           headers: {'Accept': 'application/vnd.github.html+json'},
           responseType: ResponseType.plain,
           validateStatus: (status) {
             return status != null && status >= 200 && status < 400;
           },
         );
+
       runApp(builder(dio));
     },
     (error, stackTrace) => dev.log(
