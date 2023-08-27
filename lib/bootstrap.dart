@@ -25,6 +25,7 @@ void bootstrap(_BootstrapBuilder builder) {
       await IsarDatabase().init();
       final dio = Dio()
         ..options = BaseOptions(
+          baseUrl: 'https://api.github.com/',
           headers: {'Accept': 'application/vnd.github.html+json'},
           responseType: ResponseType.plain,
           validateStatus: (status) {

@@ -10,8 +10,7 @@ class DartDetailRemoteService extends DetailRemoteService {
   });
 
   _DartDetail getDartChangelogDetail(int id) {
-    const fullPathToMarkdownFile =
-        'https://api.github.com/repos/dart-lang/sdk/contents/CHANGELOG.md';
+    const fullPathToMarkdownFile = 'repos/dart-lang/sdk/contents/CHANGELOG.md';
     return super.getDetail(id, fullPathToMarkdownFile);
   }
 }
