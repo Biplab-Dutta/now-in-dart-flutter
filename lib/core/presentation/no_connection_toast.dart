@@ -9,12 +9,12 @@ Future<void> showNoConnectionToast(
     context: context,
     duration: const Duration(seconds: 2),
     builder: (context, controller) {
-      return Flash<Object?>.dialog(
+      return FlashBar(
         controller: controller,
         backgroundColor: Colors.black.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         margin: const EdgeInsets.all(8),
-        child: Padding(
+        content: Padding(
           padding: const EdgeInsets.all(8),
           child: Text(
             message,
