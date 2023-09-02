@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:now_in_dart_flutter/core/domain/failure.dart';
 import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_repository.dart';
@@ -27,28 +29,37 @@ class DartDetailBloc extends Bloc<DartDetailEvent, DartDetailState> {
 
   final DartDetailRepository _repository;
 
-  Future<void> _onDartChangelogDetailRequested(
+  Future<Unit> _onDartChangelogDetailRequested(
     Emitter<DartDetailState> emit,
     int id,
   ) async {
     emit(state.copyWith(status: () => DartDetailStatus.loading));
-    final failureOrSuccessDetail = await _repository.getDartDetail(id);
-    return failureOrSuccessDetail.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: () => DartDetailStatus.failure,
-          failureMessage: () => failure.when<String>(
-            api: (errorCode) => 'API returned $errorCode',
+    final failureOrSuccessDetail = await _repository.getDartDetail(id).run();
+    return failureOrSuccessDetail.match(
+      (failure) {
+        emit(
+          state.copyWith(
+            status: () => DartDetailStatus.failure,
+            failureMessage: () {
+              return switch (failure) {
+                ApiFailure() => failure.message,
+                UriParserFailure() => failure.message,
+              };
+            },
           ),
-        ),
-      ),
-      (detail) => emit(
-        state.copyWith(
-          status: () => DartDetailStatus.success,
-          detail: () => detail,
-          failureMessage: () => null,
-        ),
-      ),
+        );
+        return unit;
+      },
+      (detail) {
+        emit(
+          state.copyWith(
+            status: () => DartDetailStatus.success,
+            detail: () => detail,
+            failureMessage: () => null,
+          ),
+        );
+        return unit;
+      },
     );
   }
 }
