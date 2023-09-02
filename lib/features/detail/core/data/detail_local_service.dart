@@ -1,3 +1,4 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:isar/isar.dart';
 import 'package:meta/meta.dart';
 import 'package:now_in_dart_flutter/core/data/data.dart';
@@ -13,15 +14,20 @@ abstract class DetailLocalService {
   Isar get _isar => _isarDb.instance;
 
   @protected
-  Future<void> upsertDetail(DetailDTO detailDTO) async {
-    await _isar.writeTxn<int>(
-      () => _isar.detailDTOs.put(detailDTO),
+  Task<Unit> upsertDetail(DetailDTO detailDTO) {
+    final txn = _isar.writeTxn<Unit>(
+      () async {
+        await _isar.detailDTOs.put(detailDTO);
+        return unit;
+      },
       silent: true,
     );
+
+    return Task(() => txn);
   }
 
   @protected
-  Future<DetailDTO?> getDetail(int id) {
-    return _isar.detailDTOs.get(id);
+  Task<DetailDTO?> getDetail(int id) {
+    return Task(() => _isar.detailDTOs.get(id));
   }
 }
