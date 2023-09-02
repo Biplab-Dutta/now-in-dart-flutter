@@ -1,13 +1,12 @@
-import 'package:dartz/dartz.dart';
-import 'package:now_in_dart_flutter/core/data/network_exception.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:now_in_dart_flutter/core/domain/failure.dart';
 import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
 import 'package:now_in_dart_flutter/features/detail/core/domain/detail.dart';
-import 'package:now_in_dart_flutter/features/detail/core/domain/detail_failure.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_local_service.dart';
 import 'package:now_in_dart_flutter/features/detail/dart_detail/data/dart_detail_remote_service.dart';
 
-typedef _DartDetailOrFailure = Future<Either<DetailFailure, Fresh<Detail>>>;
+typedef _DartDetailOrFailure = TaskEither<Failure, Fresh<Detail>>;
 
 class DartDetailRepository {
   DartDetailRepository({
@@ -19,28 +18,31 @@ class DartDetailRepository {
   final DartDetailLocalService _localService;
   final DartDetailRemoteService _remoteService;
 
-  _DartDetailOrFailure getDartDetail(int id) async {
-    try {
-      final remoteResponse = await _remoteService.getDartChangelogDetail(id);
-      return right(
-        await remoteResponse.when(
+  _DartDetailOrFailure getDartDetail(int id) {
+    return TaskEither.Do(
+      (_) async {
+        final remoteResponse = await _(
+          _remoteService.getDartChangelogDetail(id),
+        );
+
+        return remoteResponse.when(
           noConnection: () async {
-            final dto = await _localService.getDartDetail(id);
+            final dto = await _(_localService.getDartDetail(id).toTaskEither());
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
           },
           notModified: () async {
-            final cachedData = await _localService.getDartDetail(id);
+            final cachedData = await _(
+              _localService.getDartDetail(id).toTaskEither(),
+            );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
           },
           withNewData: (html) async {
             final dto = DetailDTO.parseHtml(id, html);
-            await _localService.upsertDartDetail(dto);
+            await _(_localService.upsertDartDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());
           },
-        ),
-      );
-    } on RestApiException catch (e) {
-      return left(DetailFailure.api(e.errorCode));
-    }
+        );
+      },
+    );
   }
 }
