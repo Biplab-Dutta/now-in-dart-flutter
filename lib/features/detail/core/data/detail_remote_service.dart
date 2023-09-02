@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:meta/meta.dart';
 import 'package:now_in_dart_flutter/core/data/data.dart';
+import 'package:now_in_dart_flutter/core/domain/failure.dart';
 
-typedef _RemoteMarkdown = Future<RemoteResponse<String>>;
+typedef _FailureOrRemoteResponse = TaskEither<Failure, RemoteResponse<String>>;
 
 abstract class DetailRemoteService {
   DetailRemoteService({
@@ -15,45 +17,80 @@ abstract class DetailRemoteService {
   final HeaderCache _headerCache;
 
   @protected
-  _RemoteMarkdown getDetail(int id, String fullPathToMarkdownFile) async {
-    final requestUri = Uri.parse(fullPathToMarkdownFile);
-    final cachedHeader = await _headerCache.getHeader(fullPathToMarkdownFile);
+  _FailureOrRemoteResponse getDetail(
+    int id,
+    String fullPathToMarkdownFile,
+  ) {
+    return TaskEither.Do(
+      (_) async {
+        final requestUri = await _(
+          _uriParser(fullPathToMarkdownFile).toTaskEither(),
+        );
 
-    try {
-      final response = await _dio.getUri<String>(
-        requestUri,
-        options: Options(
-          headers: <String, String>{
-            'If-None-Match': cachedHeader?.eTag ?? '',
-          },
-        ),
-      );
+        final cachedHeader = await _(
+          _headerCache.getHeader(fullPathToMarkdownFile).toTaskEither(),
+        );
 
-      switch (response.statusCode) {
-        case 200:
-          final header = GithubHeader.parse(
-            id,
-            response,
-            fullPathToMarkdownFile,
-          );
-          await _headerCache.saveHeader(header);
-          final html = response.data!;
-          return RemoteResponse.withNewData(html);
+        return _(
+          TaskEither<Failure, Response<String>>.tryCatch(
+            () => _dio.getUri<String>(
+              requestUri,
+              options: Options(
+                headers: <String, String>{
+                  'If-None-Match': cachedHeader?.eTag ?? '',
+                },
+              ),
+            ),
+            (e, stackTrace) {
+              return ApiFailure(
+                'Error on network request',
+                errorObject: e,
+                stackTrace: stackTrace,
+              );
+            },
+          ).flatMap(
+            (response) {
+              return TaskEither<Failure, RemoteResponse<String>>(
+                () async {
+                  if (response.statusCode == 200) {
+                    final header = GithubHeader.parse(
+                      id,
+                      response,
+                      fullPathToMarkdownFile,
+                    );
 
-        case 304:
-          return const RemoteResponse.notModified();
+                    await _(_headerCache.saveHeader(header).toTaskEither());
 
-        default:
-          throw RestApiException(response.statusCode);
-      }
-    } on DioException catch (e) {
-      if (e.isNoConnectionError) {
-        return const RemoteResponse.noConnection();
-      } else if (e.response != null) {
-        throw RestApiException(e.response?.statusCode);
-      } else {
-        rethrow;
-      }
-    }
+                    final html = response.data!;
+                    return right(RemoteResponse.withNewData(html));
+                  }
+
+                  return right(const RemoteResponse.notModified());
+                },
+              );
+            },
+          ).orElse(
+            (failure) {
+              final error = failure.errorObject;
+              if (error is DioException && error.isNoConnectionError) {
+                return TaskEither.right(const RemoteResponse.noConnection());
+              }
+              return TaskEither.left(failure);
+            },
+          ),
+        );
+      },
+    );
   }
+}
+
+IOEither<Failure, Uri> _uriParser(String uri) {
+  return IOEither.tryCatch(
+    () => Uri.parse(uri),
+    (e, stackTrace) => UriParserFailure(
+      'Invalid Uri string',
+      errorObject: e,
+      stackTrace: stackTrace,
+    ),
+  );
 }
