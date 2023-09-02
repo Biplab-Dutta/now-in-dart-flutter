@@ -16,7 +16,7 @@ class _FlutterWhatsNewPageState extends State<FlutterWhatsNewPage>
   Widget build(BuildContext context) {
     super.build(context);
     return const FlutterDetailCommonPage(
-      event: FlutterDetailEvent.flutterWhatsNewDetailRequested(
+      event: FlutterWhatsNewDetailRequested(
         EntityId.flutterWhatsNewDetail,
       ),
     );

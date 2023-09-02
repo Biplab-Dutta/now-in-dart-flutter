@@ -19,7 +19,7 @@ class DartChangelogPage extends StatelessWidget {
           const id = EntityId.dartChangelogDetail;
           return DartDetailBloc(
             repository: context.read<DartDetailRepository>(),
-          )..add(const DartDetailEvent.dartChangelogDetailRequested(id));
+          )..add(const DartChangelogDetailRequested(id));
         },
         child: const DartChangelogView(),
       ),

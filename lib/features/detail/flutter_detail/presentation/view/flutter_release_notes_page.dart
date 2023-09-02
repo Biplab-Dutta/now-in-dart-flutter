@@ -17,7 +17,7 @@ class _FlutterReleaseNotesPageState extends State<FlutterReleaseNotesPage>
   Widget build(BuildContext context) {
     super.build(context);
     return const FlutterDetailCommonPage(
-      event: FlutterDetailEvent.flutterReleaseNotesDetailRequested(
+      event: FlutterReleaseNotesDetailRequested(
         EntityId.flutterReleaseNotesDetail,
       ),
     );
