@@ -1,10 +1,11 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:isar/isar.dart';
 import 'package:now_in_dart_flutter/core/data/github_header.dart';
 import 'package:now_in_dart_flutter/core/data/isar_database.dart';
 
 abstract class HeaderCache {
-  Future<void> saveHeader(GithubHeader header);
-  Future<GithubHeader?> getHeader(String path);
+  Task<Unit> saveHeader(GithubHeader header);
+  Task<GithubHeader?> getHeader(String path);
 }
 
 class GithubHeaderCache implements HeaderCache {
@@ -19,15 +20,19 @@ class GithubHeaderCache implements HeaderCache {
   IsarCollection<GithubHeader> get _githubHeaders => _isar.githubHeaders;
 
   @override
-  Future<void> saveHeader(GithubHeader header) {
-    return _isar.writeTxn<int>(
-      () => _githubHeaders.put(header),
+  Task<Unit> saveHeader(GithubHeader header) {
+    final txn = _isar.writeTxn<Unit>(
+      () async {
+        await _githubHeaders.put(header);
+        return unit;
+      },
       silent: true,
     );
+    return Task(() => txn);
   }
 
   @override
-  Future<GithubHeader?> getHeader(String path) {
-    return _githubHeaders.getByPath(path);
+  Task<GithubHeader?> getHeader(String path) {
+    return Task(() => _githubHeaders.getByPath(path));
   }
 }
