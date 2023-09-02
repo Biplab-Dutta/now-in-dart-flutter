@@ -1,10 +1,17 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+sealed class RemoteResponse<T> {
+  const RemoteResponse();
+}
 
-part 'remote_response.freezed.dart';
+class NoConnectionRemoteResponse<T> extends RemoteResponse<T> {
+  const NoConnectionRemoteResponse();
+}
 
-@freezed
-class RemoteResponse<T> with _$RemoteResponse<T> {
-  const factory RemoteResponse.noConnection() = _NoConnection<T>;
-  const factory RemoteResponse.notModified() = _NotModified<T>;
-  const factory RemoteResponse.withNewData(T data) = _WithNewData<T>;
+class NotModifiedRemoteResponse<T> extends RemoteResponse<T> {
+  const NotModifiedRemoteResponse();
+}
+
+class WithNewDataRemoteResponse<T> extends RemoteResponse<T> {
+  const WithNewDataRemoteResponse(this.data);
+
+  final T data;
 }

@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:now_in_dart_flutter/core/data/data.dart';
 import 'package:now_in_dart_flutter/core/domain/failure.dart';
 import 'package:now_in_dart_flutter/core/domain/fresh.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
@@ -25,23 +26,22 @@ class DartDetailRepository {
           _remoteService.getDartChangelogDetail(id),
         );
 
-        return remoteResponse.when(
-          noConnection: () async {
+        switch (remoteResponse) {
+          case NoConnectionRemoteResponse():
             final dto = await _(_localService.getDartDetail(id).toTaskEither());
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
-          },
-          notModified: () async {
+
+          case NotModifiedRemoteResponse<String>():
             final cachedData = await _(
               _localService.getDartDetail(id).toTaskEither(),
             );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
-          },
-          withNewData: (html) async {
-            final dto = DetailDTO.parseHtml(id, html);
+
+          case WithNewDataRemoteResponse<String>():
+            final dto = DetailDTO.parseHtml(id, remoteResponse.data);
             await _(_localService.upsertDartDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());
-          },
-        );
+        }
       },
     );
   }

@@ -62,10 +62,10 @@ abstract class DetailRemoteService {
                     await _(_headerCache.saveHeader(header).toTaskEither());
 
                     final html = response.data!;
-                    return right(RemoteResponse.withNewData(html));
+                    return right(WithNewDataRemoteResponse(html));
                   }
 
-                  return right(const RemoteResponse.notModified());
+                  return right(const NotModifiedRemoteResponse());
                 },
               );
             },
@@ -73,7 +73,7 @@ abstract class DetailRemoteService {
             (failure) {
               final error = failure.errorObject;
               if (error is DioException && error.isNoConnectionError) {
-                return TaskEither.right(const RemoteResponse.noConnection());
+                return TaskEither.right(const NoConnectionRemoteResponse());
               }
               return TaskEither.left(failure);
             },

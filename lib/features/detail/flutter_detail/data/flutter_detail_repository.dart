@@ -34,25 +34,23 @@ class FlutterDetailRepository {
     return TaskEither.Do(
       (_) async {
         final remoteResponse = await _(caller(id));
-        return remoteResponse.when(
-          noConnection: () async {
+
+        switch (remoteResponse) {
+          case NoConnectionRemoteResponse():
             final dto = await _(
               _localService.getFlutterDetail(id).toTaskEither(),
             );
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
-          },
-          notModified: () async {
+          case NotModifiedRemoteResponse():
             final cachedData = await _(
               _localService.getFlutterDetail(id).toTaskEither(),
             );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
-          },
-          withNewData: (html) async {
-            final dto = DetailDTO.parseHtml(id, html);
+          case WithNewDataRemoteResponse():
+            final dto = DetailDTO.parseHtml(id, remoteResponse.data);
             await _(_localService.upsertFlutterDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());
-          },
-        );
+        }
       },
     );
   }
