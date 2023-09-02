@@ -6,12 +6,12 @@ class NoConnectionRemoteResponse<T> extends RemoteResponse<T> {
   const NoConnectionRemoteResponse();
 }
 
-class NotModifiedRemoteResponse<T> extends RemoteResponse<T> {
-  const NotModifiedRemoteResponse();
+class UnModifiedRemoteResponse<T> extends RemoteResponse<T> {
+  const UnModifiedRemoteResponse();
 }
 
-class WithNewDataRemoteResponse<T> extends RemoteResponse<T> {
-  const WithNewDataRemoteResponse(this.data);
+class ModifiedRemoteResponse<T> extends RemoteResponse<T> {
+  const ModifiedRemoteResponse(this.data);
 
   final T data;
 }

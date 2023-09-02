@@ -62,10 +62,10 @@ abstract class DetailRemoteService {
                     await _(_headerCache.saveHeader(header).toTaskEither());
 
                     final html = response.data!;
-                    return right(WithNewDataRemoteResponse(html));
+                    return right(ModifiedRemoteResponse(html));
                   }
 
-                  return right(const NotModifiedRemoteResponse());
+                  return right(const UnModifiedRemoteResponse());
                 },
               );
             },

@@ -31,13 +31,13 @@ class DartDetailRepository {
             final dto = await _(_localService.getDartDetail(id).toTaskEither());
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
 
-          case NotModifiedRemoteResponse<String>():
+          case UnModifiedRemoteResponse<String>():
             final cachedData = await _(
               _localService.getDartDetail(id).toTaskEither(),
             );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
 
-          case WithNewDataRemoteResponse<String>():
+          case ModifiedRemoteResponse<String>():
             final dto = DetailDTO.parseHtml(id, remoteResponse.data);
             await _(_localService.upsertDartDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());

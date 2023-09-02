@@ -41,12 +41,12 @@ class FlutterDetailRepository {
               _localService.getFlutterDetail(id).toTaskEither(),
             );
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
-          case NotModifiedRemoteResponse():
+          case UnModifiedRemoteResponse():
             final cachedData = await _(
               _localService.getFlutterDetail(id).toTaskEither(),
             );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
-          case WithNewDataRemoteResponse():
+          case ModifiedRemoteResponse():
             final dto = DetailDTO.parseHtml(id, remoteResponse.data);
             await _(_localService.upsertFlutterDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());
