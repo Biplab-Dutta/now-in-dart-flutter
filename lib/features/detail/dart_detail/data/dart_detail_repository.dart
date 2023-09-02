@@ -26,22 +26,23 @@ class DartDetailRepository {
           _remoteService.getDartChangelogDetail(id),
         );
 
-        switch (remoteResponse) {
-          case NoConnectionRemoteResponse():
+        return remoteResponse.when(
+          noConnection: () async {
             final dto = await _(_localService.getDartDetail(id).toTaskEither());
             return Fresh.no(entity: dto?.toDomain() ?? Detail.empty);
-
-          case UnModifiedRemoteResponse<String>():
+          },
+          unmodifed: () async {
             final cachedData = await _(
               _localService.getDartDetail(id).toTaskEither(),
             );
             return Fresh.yes(entity: cachedData?.toDomain() ?? Detail.empty);
-
-          case ModifiedRemoteResponse<String>():
-            final dto = DetailDTO.parseHtml(id, remoteResponse.data);
+          },
+          modified: (data) async {
+            final dto = DetailDTO.parseHtml(id, data);
             await _(_localService.upsertDartDetail(dto).toTaskEither());
             return Fresh.yes(entity: dto.toDomain());
-        }
+          },
+        );
       },
     );
   }
