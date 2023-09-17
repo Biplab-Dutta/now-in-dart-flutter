@@ -17,6 +17,7 @@ abstract class DetailRemoteService {
   final HeaderCache _headerCache;
 
   @protected
+  @visibleForTesting
   _FailureOrRemoteResponse getDetail(
     int id,
     String fullPathToMarkdownFile,
