@@ -35,6 +35,11 @@ void main() {
         eTag: '12345',
         path: '/path',
       );
+
+      test(
+        'instantiates Dio() and HeaderCache() when not injected',
+        () => expect(MockDetailRemoteService(), isNotNull),
+      );
       group(
         'The method `getDetail`',
         () {
