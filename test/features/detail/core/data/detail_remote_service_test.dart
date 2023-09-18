@@ -37,7 +37,7 @@ void main() {
       );
 
       test(
-        'instantiates Dio() and HeaderCache() when not injected',
+        'should instantiate Dio() and HeaderCache() when not injected',
         () => expect(MockDetailRemoteService(), isNotNull),
       );
       group(
