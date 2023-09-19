@@ -48,7 +48,7 @@ void main() {
             ' i.e. ModifiedRemoteResponse if the status code is 200',
             () async {
               when(
-                () => headerCache.getHeader(any()),
+                () => headerCache.getHeader(any(that: isA<String>())),
               ).thenReturn(Task(() async => fakeGithubHeader));
 
               when(() => headers.map).thenReturn(
@@ -63,13 +63,13 @@ void main() {
 
               when(
                 () => dio.getUri<String>(
-                  any(),
-                  options: any(named: 'options'),
+                  any(that: isA<Uri>()),
+                  options: any(named: 'options', that: isA<Options>()),
                 ),
               ).thenAnswer((_) async => response);
 
               when(
-                () => headerCache.saveHeader(any()),
+                () => headerCache.saveHeader(any(that: isA<GithubHeader>())),
               ).thenReturn(Task(() async => unit));
 
               final result =
@@ -89,15 +89,15 @@ void main() {
             ' i.e. UnModifiedRemoteResponse if the status code is 304',
             () async {
               when(
-                () => headerCache.getHeader(any()),
+                () => headerCache.getHeader(any(that: isA<String>())),
               ).thenReturn(Task(() async => fakeGithubHeader));
 
               when(() => response.statusCode).thenReturn(304);
 
               when(
                 () => dio.getUri<String>(
-                  any(),
-                  options: any(named: 'options'),
+                  any(that: isA<Uri>()),
+                  options: any(named: 'options', that: isA<Options>()),
                 ),
               ).thenAnswer((_) async => response);
 
@@ -119,13 +119,13 @@ void main() {
             'is thrown',
             () async {
               when(
-                () => headerCache.getHeader(any()),
+                () => headerCache.getHeader(any(that: isA<String>())),
               ).thenReturn(Task(() async => fakeGithubHeader));
 
               when(
                 () => dio.getUri<String>(
-                  any(),
-                  options: any(named: 'options'),
+                  any(that: isA<Uri>()),
+                  options: any(named: 'options', that: isA<Options>()),
                 ),
               ).thenThrow(
                 DioException.connectionError(
@@ -152,13 +152,13 @@ void main() {
             () async {
               const errorMessage = 'Error on network request';
               when(
-                () => headerCache.getHeader(any()),
+                () => headerCache.getHeader(any(that: isA<String>())),
               ).thenReturn(Task(() async => fakeGithubHeader));
 
               when(
                 () => dio.getUri<String>(
-                  any(),
-                  options: any(named: 'options'),
+                  any(that: isA<Uri>()),
+                  options: any(named: 'options', that: isA<Options>()),
                 ),
               ).thenThrow(Exception());
 
