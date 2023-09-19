@@ -7,7 +7,7 @@ part 'fakes.dart';
 
 class MockDio extends Mock implements Dio {}
 
-class MockResponse extends Mock implements Response<String> {}
+class MockResponse<T> extends Mock implements Response<T> {}
 
 class MockHeaders extends Mock implements Headers {}
 

@@ -11,7 +11,7 @@ import '../../../../helpers/register_multiple_fallback_values.dart';
 
 void main() {
   final dio = MockDio();
-  final response = MockResponse();
+  final response = MockResponse<String>();
   final headers = MockHeaders();
   final headerCache = MockHeaderCache();
   final detailRemoteService = MockDetailRemoteService(
