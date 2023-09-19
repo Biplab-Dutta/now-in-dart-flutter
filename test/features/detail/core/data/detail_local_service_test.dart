@@ -1,7 +1,7 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:now_in_dart_flutter/features/detail/core/data/detail_dto.dart';
+import 'package:test/test.dart';
 
 import '../../../../helpers/mocks.dart';
 
