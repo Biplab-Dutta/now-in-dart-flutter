@@ -43,14 +43,15 @@ void main() {
       group(
         'The method `getDetail`',
         () {
+          setUpAll(
+            () => when(
+              () => headerCache.getHeader(any(that: isA<String>())),
+            ).thenReturn(Task(() async => fakeGithubHeader)),
+          );
           test(
             'should return right of TaskEither<Failure, RemoteResponse<String>>'
             ' i.e. ModifiedRemoteResponse if the status code is 200',
             () async {
-              when(
-                () => headerCache.getHeader(any(that: isA<String>())),
-              ).thenReturn(Task(() async => fakeGithubHeader));
-
               when(() => headers.map).thenReturn(
                 {
                   'ETag': ['12345'],
@@ -88,10 +89,6 @@ void main() {
             'should return right of TaskEither<Failure, RemoteResponse<String>>'
             ' i.e. UnModifiedRemoteResponse if the status code is 304',
             () async {
-              when(
-                () => headerCache.getHeader(any(that: isA<String>())),
-              ).thenReturn(Task(() async => fakeGithubHeader));
-
               when(() => response.statusCode).thenReturn(304);
 
               when(
@@ -118,10 +115,6 @@ void main() {
             ' i.e. NoConnectionRemoteResponse if DioException.connectionError '
             'is thrown',
             () async {
-              when(
-                () => headerCache.getHeader(any(that: isA<String>())),
-              ).thenReturn(Task(() async => fakeGithubHeader));
-
               when(
                 () => dio.getUri<String>(
                   any(that: isA<Uri>()),
@@ -151,9 +144,6 @@ void main() {
             ' i.e. ApiFailure if network request is unsuccessful',
             () async {
               const errorMessage = 'Error on network request';
-              when(
-                () => headerCache.getHeader(any(that: isA<String>())),
-              ).thenReturn(Task(() async => fakeGithubHeader));
 
               when(
                 () => dio.getUri<String>(
