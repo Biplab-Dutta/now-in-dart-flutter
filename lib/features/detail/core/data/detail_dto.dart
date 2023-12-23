@@ -14,7 +14,7 @@ class DetailDTO extends Equatable {
   /// `%7B%7Bsite.url%7D%7D` which actually is `{{site.url}}`. But WebView will
   /// not be able to take us to relevant web page if `%7B%7Bsite.url%7D%7D`
   /// isn't parsed. So, we need to convert `%7B%7Bsite.url%7D%7D` to
-  /// `https://docs.flutter.dev`.
+  /// `https://docs.flutter.dev` because that's what `{{site.url}}` points to.
   ///
   /// The mappings will have to be done in accordance to [_mappings].
   factory DetailDTO.parseHtml(int id, String html) {
