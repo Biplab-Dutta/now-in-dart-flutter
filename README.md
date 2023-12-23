@@ -55,7 +55,7 @@ The unit test has been written based on the `fpdart` refactoring and can be foun
 - [detail_local_service_test.dart](./test/features/detail/core/data/detail_local_service_test.dart)
 - [detail_remote_service_test.dart](./test/features/detail/core/data/detail_remote_service_test.dart)
 
-Dependencies
+## Dependencies
 The project makes use of few third-party packages for rapid development. Some of them are listed below:
 - [dio](https://pub.dev/packages/dio) (To perform network calls)
 - [equatable](https://pub.dev/packages/equatable) (To achieve value equality)
