@@ -1,12 +1,12 @@
 name: now_in_dart_flutter
 description: A simple app that uses WebView under the hood to display all the news and updates regarding Dart and Flutter. The information is retrieved using GitHub's API and the github repository used as source is that of Flutter and Dart's.
 
-publish_to: 'none'
+publish_to: "none"
 
-version: 2.0.0
+version: 2.0.1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
